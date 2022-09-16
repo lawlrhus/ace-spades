@@ -7,15 +7,16 @@ import random
 
 
 class Card:
-    ranks = ['null', 'Ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King']
+
     suits = ['Hearts', 'Diamonds', 'Spades', 'Clubs']
+    ranks = ['null', 'Ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King']
 
     def __init__(self, suit=0, rank=0):
         self.suit = suit
         self.rank = rank
 
     def __str__(self):
-        return '{0} of {1}'.format(Card.ranks[self.rank], Card.suits[self.suit]) #returns cards as descriptive strings
+        return '{0} of {1}'.format(Card.ranks[self.rank], Card.suits[self.suit])  # returns card with as descriptive strings
 
 
 class Deck:
@@ -71,12 +72,6 @@ class Hand(Deck):
     def add(self, card):
         self.cards.append(card)
 
-deck = Deck()
-# deck.shuffle()
-# hand = Hand("frank")
-# deck.deal([hand], 5)
-# print(hand)
-
 
 class CardGame:
     def __init__(self):
@@ -90,22 +85,25 @@ class AceOfSpaces(CardGame):
         self.deck.deal(self.hand, 1)
         print(self.hand)
 
+
 def playGame():
-    hand = Hand("pile")
+    deck = Deck()  # This builds your deck of cards
+    hand = Hand("pile")  # This is simply calling the __init__ function which is setting the name to "pile" and and an empty list of cards
+    #  As of right now, this is simply getting into the deck.deal method, figuring out the length is only 1, then self.pop() takes the top level
+    #  stack item, which is the last loaded.  In this case, it's the king of clubs.
     deck.deal([hand], 1)
     print(hand)
 
-    if hand == Card(3, 13):
+    if str(hand.cards[0]) == "King of Clubs":
         print("It's the", hand, ", you've won!")
         # add code here to pay out
-        #deck.shuffle()
+        # deck.shuffle()
         print(deck)
-
     else:
         print("It's the", hand, ", better luck next time")
-        print("There are now", len(deck.cards), "cards remaining, and the new payout is", len(deck.cards)-2, "to 1")
+        print("There are now", len(deck.cards), "cards remaining, and the new payout is", len(deck.cards) - 2, "to 1")
 
 
 playGame()
-print(Card(3,13))
+print(Card(3, 13))
 # AceOfSpaces().play()
